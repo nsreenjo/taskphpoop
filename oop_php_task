@@ -1,0 +1,100 @@
+<?php
+class Car {
+    private $make;
+    private $model;
+    private $vin;
+
+    public function __construct($make, $model, $vin) {
+        $this->make = $make;
+        $this->model = $model;
+        $this->vin = $vin;
+    }
+
+    public function getMake() {
+        return $this->make;
+    }
+
+    public function getModel() {
+        return $this->model;
+    }
+
+    public function getVin() {
+        return $this->vin;
+    }
+
+    public function setMake($make) {
+        $this->make = $make;
+    }
+    public function setModel($model) {
+        $this->model = $model;
+    }
+
+    public function setVin($vin) {
+        $this->vin = $vin;
+    }
+
+    public function getDetails() {
+        return "Make: {$this->make}, Model: {$this->model}, VIN: {$this->vin}";
+    }
+
+    public function __destruct() {
+        echo "Car with VIN: {$this->make} is destroyed.<br>";
+    }
+}
+
+$car1 = new Car("Lamborghini", "Aventador", "54545");
+
+echo "Make: " . $car1->getMake() . "<br>";
+echo "Model: " . $car1->getModel() . "<br>";
+echo "VIN: " . $car1->getVin() . "<br>";
+
+class Inventory {
+    private $cars = [];
+    
+    function addCar($car) {
+        $this->cars[] = $car;
+    }
+    
+
+    public function removeCar($vin) {
+        if($this->cars[$vin]) {
+            unset($this->cars[$vin]);
+        }
+    }
+
+    public function listCars() {
+        foreach($this->cars as $car) {
+            echo $car->getDetails() . "<br>";
+        }
+    }
+
+
+}
+
+$inventory = new Inventory();
+$car1 = new Car("Lamborghini", "Aventador", "54545");
+$car2 = new Car("Honda", "Civic", "67890");
+
+$inventory->addCar($car1);
+$inventory->addCar($car2);
+
+echo "<hr>";
+$inventory->listCars();
+
+// $inventory->removeCar("54545");
+
+echo "<hr>";
+$inventory->listCars();
+
+
+
+
+
+
+
+
+
+
+
+
+?>
